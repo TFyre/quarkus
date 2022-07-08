@@ -24,6 +24,7 @@ import org.eclipse.microprofile.rest.client.ext.QueryParamStyle;
 
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.InstanceHandle;
+import io.quarkus.restclient.config.Constants;
 import io.quarkus.restclient.config.RestClientConfig;
 import io.quarkus.restclient.config.RestClientsConfig;
 
@@ -55,6 +56,7 @@ public class RestClientBase {
 
     public Object create() {
         RestClientBuilder builder = RestClientBuilder.newBuilder();
+        configureConfigKey(builder);
         configureBaseUrl(builder);
         configureTimeouts(builder);
         configureProviders(builder);
@@ -70,6 +72,13 @@ public class RestClientBase {
         }
 
         return builder.build(proxyType);
+    }
+
+    void configureConfigKey(RestClientBuilder builder) {
+        if (configKey == null) {
+            return;
+        }
+        builder.property(Constants.CONFIG_KEY, configKey);
     }
 
     void configureCustomProperties(RestClientBuilder builder) {

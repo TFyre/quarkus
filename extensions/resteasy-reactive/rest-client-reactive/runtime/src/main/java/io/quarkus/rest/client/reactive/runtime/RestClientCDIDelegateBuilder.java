@@ -63,6 +63,7 @@ public class RestClientCDIDelegateBuilder<T> {
     }
 
     T build(RestClientBuilderImpl builder) {
+        configureConfigKey(builder);
         configureBaseUrl(builder);
         configureTimeouts(builder);
         configureProviders(builder);
@@ -73,6 +74,13 @@ public class RestClientCDIDelegateBuilder<T> {
         configureShared(builder);
         configureCustomProperties(builder);
         return builder.build(jaxrsInterface);
+    }
+
+    private void configureConfigKey(RestClientBuilder builder) {
+        if (configKey == null) {
+            return;
+        }
+        builder.property(QuarkusRestClientProperties.CONFIG_KEY, configKey);
     }
 
     private void configureCustomProperties(RestClientBuilder builder) {

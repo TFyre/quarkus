@@ -95,6 +95,7 @@ public class RestClientCDIDelegateBuilderTest {
         Mockito.verify(restClientBuilderMock).property(QuarkusRestClientProperties.NAME, "my-client");
         Mockito.verify(restClientBuilderMock).property(QuarkusRestClientProperties.MULTIPART_ENCODER_MODE,
                 HttpPostRequestEncoder.EncoderMode.HTML5);
+        Mockito.verify(restClientBuilderMock).property(QuarkusRestClientProperties.CONFIG_KEY, "test-client");
     }
 
     @Test

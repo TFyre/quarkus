@@ -50,4 +50,8 @@ public class QuarkusRestClientProperties {
 
     public static final String USER_AGENT = "io.quarkus.rest.client.user-agent";
 
+    /**
+     * Set the configKey property from {@link org.eclipse.microprofile.rest.client.inject.RegisterRestClient#configKey}.
+     */
+    public static final String CONFIG_KEY = "io.quarkus.rest.client.config-key";
 }

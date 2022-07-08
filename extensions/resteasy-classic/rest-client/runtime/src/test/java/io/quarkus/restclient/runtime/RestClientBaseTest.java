@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
 
+import io.quarkus.restclient.config.Constants;
 import io.quarkus.restclient.config.RestClientConfig;
 import io.quarkus.restclient.config.RestClientsConfig;
 
@@ -76,6 +77,7 @@ public class RestClientBaseTest {
                 "test-client",
                 null,
                 configRoot);
+        restClientBase.configureConfigKey(restClientBuilderMock);
         restClientBase.configureBaseUrl(restClientBuilderMock);
         restClientBase.configureTimeouts(restClientBuilderMock);
         restClientBase.configureProviders(restClientBuilderMock);
@@ -97,6 +99,7 @@ public class RestClientBaseTest {
         Mockito.verify(restClientBuilderMock).hostnameVerifier(Mockito.any(MyHostnameVerifier1.class));
         Mockito.verify(restClientBuilderMock).property("resteasy.connectionTTL", Arrays.asList(102, TimeUnit.MILLISECONDS));
         Mockito.verify(restClientBuilderMock).property("resteasy.connectionPoolSize", 103);
+        Mockito.verify(restClientBuilderMock).property(Constants.CONFIG_KEY, "test-client");
     }
 
     @Test
